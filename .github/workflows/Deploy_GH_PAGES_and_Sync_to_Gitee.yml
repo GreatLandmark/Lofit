@@ -5,10 +5,10 @@ jobs:
 #     runs-on: ubuntu-latest
 #     steps:
 #     - name: Checkout
-#       uses: actions/checkout@public
+#       uses: actions/checkout@master
 
 #     - name: Build and Deploy
-#       uses: jenkey2011/vuepress-deploy@public
+#       uses: jenkey2011/vuepress-deploy@v1
 #       env:
 #         ACCESS_TOKEN: ${{ secrets.REPOSITORY_SYNCHRONIZE_TOKEN }}
 #         # 你要操作的目标仓库
@@ -21,7 +21,7 @@ jobs:
 #         BUILD_DIR: docs/.vuepress/dist/
   sync:
 #     needs: build-and-deploy
-    runs-on: XR_Server
+    runs-on: ubuntu-latest
     steps:
     - name: Sync to Gitee
       uses: wearerequired/git-mirror-action@master
