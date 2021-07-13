@@ -1,5 +1,8 @@
 name: Deploy GH_PAGES and Sync to Gitee
-on: [push]
+on:
+  push:
+    branches:
+      - public
 jobs:
 #   build-and-deploy:
 #     runs-on: ubuntu-latest
