@@ -6,23 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        html {
+            font-size: 16px;
+        }
+
+        #page {
+            text-align: center
+        }
+
+        .center {
+            text-align: center
+        }
+
+        .horizontal {
+            float: left;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+        .contain {
+            contain: content;
+        }
+
+        #portrait {
+            width: 10rem;
+            height: 10rem;
+            padding:1rem
+        }
+    </style>
 </head>
 
 <body>
+    <div id="page">
+        <h1>Welcome to Lofit`Homepage</h1>
+        </br>
+        <div class="inline-block">
+            <div class="horizontal"><img id="portrait" src="./TouXiang1.jpg" alt="Portrait">
+            </div>
 
-
-    <h1>Welcome to Lofit`Homepage</h1>
-    <div><img src="./TouXiang1.jpg" alt="Portrait">
+            <div class="horizontal">
+                <h2>Email: GreatLandmark@outlook.com</h2>
+                </br>
+                <a href="https://github.com/">GitHub</a>
+                </br>
+                <a href="https://gitee.com/">Gitee</a>
+                </br>
+            </div>
+        </div>
     </div>
-    <div><h2>Email: GreatLandmark@outlook.com</h2>
-    </br>
-    <a href="https://github.com/">GitHub</a>
-    </br>
-    <a href="https://gitee.com/">Gitee</a>
-    </br>
-    </div>
-    
-
 </body>
 
 </html>
