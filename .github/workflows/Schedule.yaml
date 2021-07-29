@@ -1,0 +1,37 @@
+name: Schedule Sync git-repository Pre Day
+# 每日定时检查仓库是否在过去24小时内有新的提交，有：同步仓库到gitee；否：不做任何操作。
+# reference ：https://github.community/t/trigger-action-on-schedule-only-if-there-are-changes-to-the-branch/17887/4  
+on: 
+  schedule: 
+    - cron: '14 8 * * *' # at 08:14 everyday
+jobs:
+  check_date:
+    runs-on: ubuntu-latest
+    name: Check latest commit
+    outputs:
+      should_run: ${{ steps.should_run.outputs.should_run }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: print latest_commit
+        run: echo ${{ github.sha }}
+      
+      - id: should_run
+        continue-on-error: true
+        name: check latest commit is less than a day
+        if: ${{ github.event_name == 'schedule' }}
+        run: test -z $(git rev-list  --after="24 hours"  ${{ github.sha }}) && echo "::set-output name=should_run::false"  
+  
+  sync:
+    needs: check_date
+    if: ${{ needs.check_date.outputs.should_run != 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sync to Gitee
+      uses: wearerequired/git-mirror-action@master
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.MY_RSA_PRIVATE_KEY }}
+      with:
+        # 来源仓库
+        source-repo: "git@github.com:GreatLandmark/Lofit.git"
+        # 目标仓库
+        destination-repo: "git@gitee.com:greatlandmark/Lofit.git"
