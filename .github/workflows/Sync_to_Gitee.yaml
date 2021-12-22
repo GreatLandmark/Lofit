@@ -1,0 +1,16 @@
+name: Synchronize GitHub to Gitee By Commit
+on: [push]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'Sync to Gitee') }}
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.MY_RSA_PRIVATE_KEY }}
+        with:
+          # 来源仓库
+          source-repo: "git@github.com:GreatLandmark/Lofit.git"
+          # 目标仓库
+          destination-repo: "git@gitee.com:greatlandmark/Lofit.git"
